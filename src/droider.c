@@ -23,13 +23,13 @@
 static void usage(const char *p) {
     fprintf(stderr,
         "Usage: %s -a verushash -o stratum+tcp://POOL:PORT -u WALLET "
-        "[-t THREADS] [-p CPU_PERCENT] [-P PASSWORD]\\n\\n"
-        "  -a  algorithm: verushash/verus\\n"
-        "  -o  Stratum pool URL\\n"
-        "  -u  wallet[.worker]\\n"
-        "  -t  mining threads\\n"
-        "  -p  CPU duty cycle, 1..100\\n"
-        "  -P  pool password (default: x)\\n",
+        "[-t THREADS] [-p CPU_PERCENT] [-P PASSWORD]\n\n"
+        "  -a  algorithm: verushash/verus\n"
+        "  -o  Stratum pool URL\n"
+        "  -u  wallet[.worker]\n"
+        "  -t  mining threads\n"
+        "  -p  CPU duty cycle, 1..100\n"
+        "  -P  pool password (default: x)\n",
         p);
 }
 
@@ -40,7 +40,7 @@ static int parse_int(const char *s, int min, int max, int *out) {
     errno = 0;
     v = strtol(s, &end, 10);
 
-    if (errno || end == s || *end != '\\0' || v < min || v > max)
+    if (errno || end == s || *end != '\0' || v < min || v > max)
         return 0;
 
     *out = (int)v;
@@ -83,14 +83,14 @@ int main(int argc, char **argv) {
 
             case 't':
                 if (!parse_int(optarg, 1, 1024, &threads)) {
-                    fprintf(stderr, "Invalid thread count: %s\\n", optarg);
+                    fprintf(stderr, "Invalid thread count: %s\n", optarg);
                     return 2;
                 }
                 break;
 
             case 'p':
                 if (!parse_int(optarg, 1, 100, &percent)) {
-                    fprintf(stderr, "CPU percentage must be 1..100\\n");
+                    fprintf(stderr, "CPU percentage must be 1..100\n");
                     return 2;
                 }
                 break;
@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
     setpgid(pid, pid);
 
     fprintf(stderr,
-        "MiningDroid: VerusHash 2.2 | threads=%d | CPU duty=%d%%\\n",
+        "MiningDroid: VerusHash 2.2 | threads=%d | CPU duty=%d%%\n",
         threads, percent);
 
     if (percent == 100) {
