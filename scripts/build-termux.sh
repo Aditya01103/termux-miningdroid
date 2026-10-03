@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BACKEND="$ROOT/build/ccminer-verus"
 PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
+SSE2NEON="$BACKEND/sse2neon"
 
 mkdir -p "$ROOT/build"
 
@@ -23,6 +24,13 @@ fi
 
 echo "Backend commit:"
 git -C "$BACKEND" rev-parse HEAD
+
+echo "Preparing ARM64 SSE2NEON headers..."
+if [ ! -d "$SSE2NEON/.git" ]; then
+  git clone --depth 1 https://github.com/DLTcollab/sse2neon.git "$SSE2NEON"
+else
+  git -C "$SSE2NEON" pull --ff-only
+fi
 
 cd "$BACKEND"
 
