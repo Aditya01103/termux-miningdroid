@@ -10,7 +10,7 @@ mkdir -p "$ROOT/build"
 
 echo "[1/3] Checking Termux dependencies..."
 echo "Install if needed:"
-echo "pkg install git clang make autoconf automake libtool pkg-config openssl libcurl jansson"
+echo "pkg install git clang make autoconf automake libtool pkg-config openssl libcurl"
 
 if [ ! -d "$BACKEND/.git" ]; then
   echo "[2/3] Cloning VerusHash 2.2 CPU backend..."
@@ -40,7 +40,7 @@ if [ -x ./build.sh ]; then
   ./build.sh
 else
   [ -x ./autogen.sh ] && ./autogen.sh || true
-  ./configure --with-curl="$PREFIX" --with-jansson="$PREFIX"
+  ./configure
   make -j"$(nproc)"
 fi
 
