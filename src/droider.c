@@ -111,8 +111,12 @@ int main(int argc, char **argv) {
     }
 
     if (threads == 0) {
+        /*
+         * Keep one online CPU available for Android/UI work by default.
+         * Users can still explicitly set -t to use every core.
+         */
         long n = sysconf(_SC_NPROCESSORS_ONLN);
-        threads = n > 0 ? (int)n : 1;
+        threads = n > 1 ? (int)n - 1 : 1;
     }
 
     /*
@@ -201,7 +205,7 @@ int main(int argc, char **argv) {
                 return 1;
             }
 
-            usleep(1000);
+            usleep(5000);
         }
 
         if (kill(-pid, SIGSTOP) != 0) {
