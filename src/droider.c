@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
     const char *user = NULL;
     const char *pass = "x";
     int threads = 0;
-    int percent = 100;
+    int percent = 80;
     int opt;
 
     while ((opt = getopt(argc, argv, "a:o:u:t:p:P:h")) != -1) {
