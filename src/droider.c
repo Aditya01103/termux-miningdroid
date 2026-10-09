@@ -232,7 +232,7 @@ int main(int argc, char **argv) {
                 return 1;
             }
 
-            usleep(1000);
+            usleep(5000);
         }
     }
 
