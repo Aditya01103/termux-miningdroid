@@ -15,7 +15,7 @@ CPU miner frontend untuk Android/Termux dengan CLI `./droider`, memakai backend 
 | `-a verushash` | Algoritma VerusHash 2.2 |
 | `-o` | URL Stratum pool |
 | `-u` | Address wallet Verus, opsional `.worker` |
-| `-t` | Jumlah thread mining |
+| `-t` | Jumlah thread mining. Jika dihilangkan, default memakai jumlah CPU online dikurangi satu (minimal 1) agar Android masih punya ruang untuk UI. |
 | `-p` | Target duty-cycle CPU 1-100% |
 | `-P` | Password pool, biasanya `x` |
 
@@ -53,7 +53,7 @@ Gunakan Termux versi yang masih mendapat dukungan paket Android yang sesuai.
 ```bash
 pkg update
 pkg upgrade
-pkg install git clang make autoconf automake libtool pkg-config openssl libcurl jansson
+pkg install git clang make autoconf automake libtool pkg-config openssl libcurl
 ```
 
 Cek arsitektur:
@@ -165,7 +165,7 @@ Contoh:
 ./droider -a verushash -o stratum+tcp://POOL:PORT -u WALLET.worker -t 2 -p 25 -P x
 ```
 
-Kontrol dilakukan dengan `SIGSTOP/SIGCONT` pada process group miner dalam interval pendek. Karena scheduler Android, aplikasi lain, governor CPU, dan thermal throttling ikut bermain, nilai ini **bukan jaminan persentase CPU sistem yang persis**.
+Jika opsi `-t` tidak diberikan, launcher memakai jumlah CPU online dikurangi satu (minimal 1) agar sistem punya ruang untuk tugas Android lain. Atur `-t` secara eksplisit bila ingin memilih sendiri jumlah thread. Kontrol dilakukan dengan `SIGSTOP/SIGCONT` pada process group miner dalam interval pendek. Pemeriksaan proses launcher dibuat lebih jarang untuk mengurangi overhead polling. Karena scheduler Android, aplikasi lain, governor CPU, dan thermal throttling ikut bermain, nilai ini **bukan jaminan persentase CPU sistem yang persis**. Duty-cycle rendah juga dapat mengurangi hashrate secara signifikan.
 
 ## Menjalankan di background
 
