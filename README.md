@@ -16,7 +16,7 @@ CPU miner frontend untuk Android/Termux dengan CLI `./droider`, memakai backend 
 | `-o` | URL Stratum pool |
 | `-u` | Address wallet Verus, opsional `.worker` |
 | `-t` | Jumlah thread mining. Jika dihilangkan, default memakai jumlah CPU online dikurangi satu (minimal 1) agar Android masih punya ruang untuk UI. |
-| `-p` | Target duty-cycle CPU 1-100% |
+| `-p` | Target duty-cycle CPU 1-100%; default 80% agar perangkat lebih responsif |
 | `-P` | Password pool, biasanya `x` |
 
 Perhatikan typo manusia yang klasik: protokolnya **`stratum+tcp://`**, bukan `startum+tcp://`.
@@ -150,7 +150,7 @@ Port dan endpoint pool dapat berubah. Gunakan endpoint yang saat ini diberikan o
 
 ## Arti -p
 
-`-p` di `droider` adalah **CPU duty-cycle**, bukan pengaturan frekuensi CPU.
+`-p` di `droider` adalah **CPU duty-cycle**, bukan pengaturan frekuensi CPU. Default-nya 80% jika opsi ini dihilangkan, untuk mengurangi beban berkelanjutan dan memberi Android ruang bernapas.
 
 Contoh:
 
